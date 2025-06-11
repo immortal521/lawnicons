@@ -6635,6 +6635,7 @@
   <item component="ComponentInfo{org.kustom.widget.pro/android.app.AppDetailsActivity}" drawable="kwgt_pro" name="KWGT Pro" />
   <item component="ComponentInfo{org.kustom.widget.pro/org.kustom.pro.MainActivity}" drawable="kwgt_pro" name="KWGT Pro" />
   <item component="ComponentInfo{com.epf.mip/com.epf.mip.MainActivity}" drawable="iakaun" name="KWSP i-Akaun" />
+  <item component="ComponentInfo{com.kugou.android.lite/com.kugou.android.app.splash.SplashActivity}" drawable="kugou_lite" name="酷狗概念版" />
   <item component="ComponentInfo{ee.ioc.phon.android.speak/ee.ioc.phon.android.speak.activity.SpeechActionActivity}" drawable="konele" name="Kõnele" />
   <item component="ComponentInfo{com.smartstudio.koki/com.smartstudio.koki.MainActivity}" drawable="koki" name="KÖKI" />
   <item component="ComponentInfo{fr.laposte.idn/fr.laposte.idn.entrypoints.LauncherEntrypoint}" drawable="lidentite_numerique_la_poste" name="L'Identité Numérique La Poste" />
