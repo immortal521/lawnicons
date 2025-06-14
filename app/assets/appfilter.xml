@@ -6675,6 +6675,7 @@
   <item component="ComponentInfo{org.kustom.widget.pro/org.kustom.pro.MainActivity}" drawable="kwgt_pro" name="KWGT Pro" />
   <item component="ComponentInfo{com.epf.mip/com.epf.mip.MainActivity}" drawable="iakaun" name="KWSP i-Akaun" />
   <item component="ComponentInfo{com.kugou.android.lite/com.kugou.android.app.splash.SplashActivity}" drawable="kugou_lite" name="酷狗概念版" />
+  <item component="ComponentInfo{com.kugou.android/com.kugou.android.app.splash.SplashActivity}" drawable="kugou_lite" name="酷狗音乐" />
   <item component="ComponentInfo{com.larus.nova/com.larus.home.impl.alias.AliasActivity1}" drawable="doubao" name="豆包" />
   <item component="ComponentInfo{com.larus.nova/com.larus.home.impl.alias.AliasActivity2}" drawable="doubao" name="豆包" />
   <item component="ComponentInfo{com.larus.nova/com.larus.home.impl.alias.AliasActivity3}" drawable="doubao" name="豆包" />
