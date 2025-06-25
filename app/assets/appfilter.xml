@@ -6905,6 +6905,9 @@
   <item component="ComponentInfo{com.larus.nova/com.larus.home.impl.alias.AliasActivity2}" drawable="doubao" name="豆包" />
   <item component="ComponentInfo{com.larus.nova/com.larus.home.impl.alias.AliasActivity3}" drawable="doubao" name="豆包" />
   <item component="ComponentInfo{com.heytap.reader/com.chaozh.iReader.ui.activity.WelcomeActivity}" drawable="moon_plus_reader" name="阅读" />
+  <item component="ComponentInfo{com.jjwxc.reader/com.jjwxc.reader.AppPrivacyActivity}" drawable="jjxsyd" name="晋江小说阅读" />
+  <item component="ComponentInfo{com.oplus.tips/com.oplus.tips.activity.MainActivity}" drawable="oneplus_tips" name="使用技巧" />
+  <item component="ComponentInfo{com.coloros.familyguard/com.coloros.familyguard.FakeActivity}" drawable="family_safety" name="家人守护" />
   <item component="ComponentInfo{cn.missevan/cn.missevan.activity.SplashActivity}" drawable="cat_fm" name="猫儿FM" />
   <item component="ComponentInfo{com.ikf.earphone/com.ikf.earphone.activity.WelcomeActivity}" drawable="ikf" name="iKF" />
   <item component="ComponentInfo{ee.ioc.phon.android.speak/ee.ioc.phon.android.speak.activity.SpeechActionActivity}" drawable="konele" name="Kõnele" />
