@@ -28,15 +28,9 @@ You can contribute your icons, fulfill icon requests, add missing app components
 
 Code-related contributions are welcome. Significant changes to the UI should be discussed in our Discord. Generally, we want to keep things clean and simple.
 
-To build Lawnicons, select the `appDebug` build variant.
+Visit the Lawnicons developer wiki for developer information regarding Lawnicons.
 
-Tips
-- Set `develop` as the base branch for pull requests.
-- You can use either Java or, preferably, Kotlin.
-- Make sure your code is logical and well formatted. If using Kotlin, see "Coding conventions" in the Kotlin documentation.
-- The `app` module contains most of Lawnicons' core code, while the `svg-processor` module contains the code that converts the SVGs inside the `svgs` folder into Android Drawables. Generally, the `app` module is where you should make most of your contributions.
-
-[Coding conventions](https://kotlinlang.org/docs/coding-conventions.html) • [App module](app/) • [SVG-processor module](svg-processor/)
+[Lawnicons developer wiki](https://github.com/LawnchairLauncher/lawnicons/wiki)
 
 ## Lawnicons design guidelines
 
@@ -52,6 +46,7 @@ The contributors who laid the foundations: [GrabsterTV](https://github.com/Grabs
 The Lawnicons style is built on strong fundamentals and a commitment to quality. To minimize the need for rework, please read these guidelines carefully. Our main goal is to create high-quality icons that clearly represent their respective apps. To achieve this goal, you may sometimes need to redesign an icon from scratch.
 
 Tips
+- Use the Lawnicons style, rather than trying to reproduce the original exactly.
 - Practice on easy-to-make icons to understand the whole process.
 - See how other contributors have made pull requests (PRs).
 - Make no more than 5 icons at a time, as long as your PRs require rework.
@@ -394,7 +389,7 @@ Template
 
 **Clean commit history**  
 
-Please keep your repository up to date if you plan to create more than one PR, otherwise you may drag a commit history through all your PRs. There are two main ways to do this:
+A commit history appears after your PR is merged. Please keep your repository up to date if you plan to create more than one PR, otherwise you may drag the commit history through all your PRs. There are two main ways to do this:
 - Open `Terminal` on the local copy of your repository via GitHub Desktop. Run `git reset --hard upstream/develop`. Overwrite your repository with your local copy via GitHub Desktop: `Force push origin`.
 - Or delete your repository and start the contribution process from scratch.
 
