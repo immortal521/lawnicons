@@ -6915,6 +6915,8 @@
   <item component="ComponentInfo{cn.ylkj.zmjh/cn.ylkj.zmjh.ui.business.splash.SplashActivity}" drawable="zmjh" name="朝暮计划" />
   <item component="ComponentInfo{com.oplus.tips/com.oplus.tips.activity.MainActivity}" drawable="oneplus_tips" name="使用技巧" />
   <item component="ComponentInfo{com.coloros.familyguard/com.coloros.familyguard.FakeActivity}" drawable="family_safety" name="家人守护" />
+  <item component="ComponentInfo{com.tencent.fiftyone.yc/com.tencent.gcloud.msdk.core.policy.MSDKPolicyActivity}" drawable="fiftyone" name="桃源深处有人家" />
+  <item component="ComponentInfo{com.example.pixel/com.example.pixel.MainActivity}" drawable="draw_pixel" name="画像素" />
   <item component="ComponentInfo{cn.missevan/cn.missevan.activity.SplashActivity}" drawable="cat_fm" name="猫儿FM" />
   <item component="ComponentInfo{com.ikf.earphone/com.ikf.earphone.activity.WelcomeActivity}" drawable="ikf" name="iKF" />
   <item component="ComponentInfo{ee.ioc.phon.android.speak/ee.ioc.phon.android.speak.activity.SpeechActionActivity}" drawable="konele" name="Kõnele" />
