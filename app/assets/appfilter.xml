@@ -6914,7 +6914,12 @@
   <item component="ComponentInfo{com.larus.nova/com.larus.home.impl.alias.AliasActivity3}" drawable="doubao" name="豆包" />
   <item component="ComponentInfo{com.heytap.reader/com.chaozh.iReader.ui.activity.WelcomeActivity}" drawable="moon_plus_reader" name="阅读" />
   <item component="ComponentInfo{com.xhw.xinghuiwu/com.junyue.novel.ui.SplashActivity}" drawable="star_draw_house" name="星绘屋" />
-  <item component="ComponentInfo{jqenxun.shu.zhuiqu/flc.ast.SplashActivity}" drawable="star_draw_house" name="星绘屋" />
+  <item component="ComponentInfo{net.huanci.hsjpro/net.huanci.hsjpro.activities.FlashActivity}" drawable="draw_world" name="画世界Pro" />
+  <item component="ComponentInfo{com.jideos.jnotes/com.jideos.module_start.common.ui.StartActivity}" drawable="cloud_note" name="云记" />
+  <item component="componentinfo{com.newskyer.draw/com.newskyer.draw.activity.SplashActivity}" drawable="enjoy_taking_notes" name="享做笔记" />
+  <item component="componentinfo{com.wyt.iexuetang.hd.iexuetang/com.wyt.common.ui.adv.AdvertisingActivity2}" drawable="geling_class" name="格灵课堂" />
+  <item component="componentinfo{com.oplus.studycenter/com.oplus.studycenter.main.ui.activity.SplashActivity}" drawable="study_space" name="学习空间" />
+  <item component="componentinfo{jqenxun.shu.zhuiqu/flc.ast.splashactivity}" drawable="star_draw_house" name="星绘屋" />
   <item component="ComponentInfo{com.jjwxc.reader/com.jjwxc.reader.AppPrivacyActivity}" drawable="jjxsyd" name="晋江小说阅读" />
   <item component="ComponentInfo{cn.ylkj.zmjh/cn.ylkj.zmjh.ui.business.splash.SplashActivity}" drawable="zmjh" name="朝暮计划" />
   <item component="ComponentInfo{com.oplus.tips/com.oplus.tips.activity.MainActivity}" drawable="oneplus_tips" name="使用技巧" />
