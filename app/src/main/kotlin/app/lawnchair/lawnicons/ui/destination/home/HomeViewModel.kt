@@ -26,9 +26,11 @@ import androidx.lifecycle.viewModelScope
 import app.lawnchair.lawnicons.data.model.IconInfoModel
 import app.lawnchair.lawnicons.data.model.IconRequestModel
 import app.lawnchair.lawnicons.data.model.SearchMode
+import app.lawnchair.lawnicons.data.repository.DummySharedPreferences
 import app.lawnchair.lawnicons.data.repository.NewIconsRepository
+import app.lawnchair.lawnicons.data.repository.PreferenceManager
 import app.lawnchair.lawnicons.data.repository.home.IconRepository
-import app.lawnchair.lawnicons.data.repository.home.IconRequestSettingsRepository
+import app.lawnchair.lawnicons.data.repository.iconrequest.IconRequestRepository
 import app.lawnchair.lawnicons.ui.util.SampleData
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -42,6 +44,8 @@ interface HomeViewModel {
     val searchedIconInfoModel: StateFlow<IconInfoModel>
     val iconRequestModel: StateFlow<IconRequestModel?>
     val newIconsInfoModel: StateFlow<IconInfoModel>
+
+    val preferenceManager: PreferenceManager
 
     var iconRequestsEnabled: Boolean
 
@@ -59,12 +63,13 @@ interface HomeViewModel {
 class HomeViewModelImpl @Inject constructor(
     private val iconRepository: IconRepository,
     private val newIconsRepository: NewIconsRepository,
-    private val iconRequestSettingsRepository: IconRequestSettingsRepository,
+    private val iconRequestRepository: IconRequestRepository,
+    override val preferenceManager: PreferenceManager,
 ) : ViewModel(),
     HomeViewModel {
     override val iconInfoModel = iconRepository.iconInfoModel
     override val searchedIconInfoModel = iconRepository.searchedIconInfoModel
-    override val iconRequestModel = iconRepository.iconRequestList
+    override val iconRequestModel = iconRequestRepository.iconRequestList
     override val newIconsInfoModel = newIconsRepository.newIconsInfoModel
 
     override var iconRequestsEnabled = false
@@ -81,7 +86,7 @@ class HomeViewModelImpl @Inject constructor(
     init {
         viewModelScope.launch {
             val result = runCatching {
-                iconRequestSettingsRepository.getEnabledState()
+                iconRequestRepository.getEnabledState()
             }
 
             iconRequestsEnabled = when {
@@ -129,6 +134,8 @@ class DummyLawniconsViewModel : HomeViewModel {
     override val searchedIconInfoModel = MutableStateFlow(IconInfoModel(iconInfo = list, iconCount = list.size)).asStateFlow()
     override val iconRequestModel = MutableStateFlow(IconRequestModel(list = listOf(), iconCount = 0)).asStateFlow()
     override val newIconsInfoModel = MutableStateFlow(IconInfoModel(iconInfo = list, iconCount = list.size)).asStateFlow()
+
+    override val preferenceManager = PreferenceManager(DummySharedPreferences())
 
     override var iconRequestsEnabled = true
 

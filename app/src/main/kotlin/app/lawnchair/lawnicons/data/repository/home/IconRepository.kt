@@ -17,14 +17,9 @@
 package app.lawnchair.lawnicons.data.repository.home
 
 import android.app.Application
-import app.lawnchair.lawnicons.data.model.IconInfo
 import app.lawnchair.lawnicons.data.model.IconInfoModel
-import app.lawnchair.lawnicons.data.model.IconRequest
-import app.lawnchair.lawnicons.data.model.IconRequestModel
 import app.lawnchair.lawnicons.data.model.SearchInfo
 import app.lawnchair.lawnicons.data.model.SearchMode
-import app.lawnchair.lawnicons.data.model.getFirstLabelAndComponent
-import app.lawnchair.lawnicons.data.model.splitByComponentName
 import javax.inject.Inject
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -37,7 +32,6 @@ import kotlinx.coroutines.withContext
 interface IconRepository {
     val iconInfoModel: StateFlow<IconInfoModel>
     val searchedIconInfoModel: StateFlow<IconInfoModel>
-    val iconRequestList: MutableStateFlow<IconRequestModel?>
 
     suspend fun search(mode: SearchMode, query: String)
     fun clearSearch()
@@ -53,8 +47,6 @@ class IconRepositoryImpl @Inject constructor(application: Application) : IconRep
     private val _searchedIconInfoModel = MutableStateFlow(IconInfoModel())
     override val searchedIconInfoModel = _searchedIconInfoModel.asStateFlow()
 
-    override val iconRequestList = MutableStateFlow<IconRequestModel?>(value = null)
-
     init {
         coroutineScope.launch {
             val iconList = application.getIconInfo().sortedBy { it.label.lowercase() }
@@ -66,10 +58,6 @@ class IconRepositoryImpl @Inject constructor(application: Application) : IconRep
                 iconCount = iconCount,
             )
             _searchedIconInfoModel.value = _iconInfoModel.value
-
-            val systemPackageList = application.getSystemIconInfoAppfilter()
-                .sortedBy { it.label.lowercase() }
-            getIconRequestList(systemPackageList)
         }
     }
 
@@ -80,7 +68,7 @@ class IconRepositoryImpl @Inject constructor(application: Application) : IconRep
         val filteredIcons = _iconInfoModel.value.iconInfo.mapNotNull { candidate ->
             val searchIn = when (mode) {
                 SearchMode.LABEL -> candidate.componentNames.map { it.label }
-                SearchMode.COMPONENT -> candidate.componentNames.map { it.componentName }
+                SearchMode.COMPONENT -> candidate.componentNames.map { it.componentName.flattenToString() }
                 SearchMode.DRAWABLE -> listOf(candidate.drawableName)
             }
             val indexOfMatch = searchIn.map {
@@ -112,32 +100,5 @@ class IconRepositoryImpl @Inject constructor(application: Application) : IconRep
 
     override fun clearSearch() {
         _searchedIconInfoModel.value = _iconInfoModel.value
-    }
-
-    private suspend fun getIconRequestList(systemPackageList: List<IconInfo>) = withContext(Dispatchers.Default) {
-        val lawniconsData = _iconInfoModel.value.iconInfo
-
-        val systemData = systemPackageList.map { info ->
-            info.getFirstLabelAndComponent()
-        }
-
-        val lawniconsComponents = lawniconsData
-            .splitByComponentName()
-            .map { it.getFirstLabelAndComponent().componentName }
-            .sortedBy { it.lowercase() }
-            .toSet()
-
-        val commonItems = systemData.filter { it.componentName !in lawniconsComponents }
-            .map {
-                IconRequest(
-                    label = it.label,
-                    componentName = it.componentName,
-                )
-            }
-
-        iconRequestList.value = IconRequestModel(
-            list = commonItems,
-            iconCount = commonItems.size,
-        )
     }
 }

@@ -36,7 +36,7 @@ object SampleData {
         componentNames = listOf(
             LabelAndComponent("Email", "com.android.email"),
         ),
-        id = 1,
+        drawableId = 1,
     )
     val iconInfoList = listOf(
         IconInfo(
@@ -44,21 +44,21 @@ object SampleData {
             componentNames = listOf(
                 LabelAndComponent("Email", "com.android.email"),
             ),
-            id = 1,
+            drawableId = 1,
         ),
         IconInfo(
             drawableName = "@drawable/search",
             componentNames = listOf(
                 LabelAndComponent("Search", "com.android.search"),
             ),
-            id = 2,
+            drawableId = 2,
         ),
         IconInfo(
             drawableName = "@drawable/phone",
             componentNames = listOf(
                 LabelAndComponent("Phone", "com.android.phone"),
             ),
-            id = 3,
+            drawableId = 3,
         ),
     )
 }

@@ -1,11 +1,19 @@
 package app.lawnchair.lawnicons.data.model
 
-data class IconRequest(
-    val label: String,
-    val componentName: String,
+import java.io.File
+
+/**
+ * Represents a request for a list of system icons.
+ *
+ * @property list A list of [SystemIconInfo] objects representing the icons.
+ * @property iconCount The total number of icons in the list.
+ */
+data class IconRequestModel(
+    val list: List<SystemIconInfo>,
+    val iconCount: Int,
 )
 
-data class IconRequestModel(
-    val list: List<IconRequest>,
-    val iconCount: Int,
+data class IconRequestData(
+    val zipFile: File,
+    val componentListString: String,
 )
