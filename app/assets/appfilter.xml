@@ -6950,6 +6950,7 @@
   <item component="ComponentInfo{com.xhw.xinghuiwu/com.junyue.novel.ui.SplashActivity}" drawable="star_draw_house" name="星绘屋" />
   <item component="ComponentInfo{net.huanci.hsjpro/net.huanci.hsjpro.activities.FlashActivity}" drawable="draw_world" name="画世界Pro" />
   <item component="ComponentInfo{com.jideos.jnotes/com.jideos.module_start.common.ui.StartActivity}" drawable="cloud_note" name="云记" />
+  <item component="ComponentInfo{com.wisedu.cpdaily/com.wisorg.wisedu.login.WelcomeActivity}" drawable="jrxy" name="今日校园" />
   <item component="ComponentInfo{com.newskyer.draw/com.newskyer.draw.activity.SplashActivity}" drawable="enjoy_taking_notes" name="享做笔记" />
   <item component="ComponentInfo{com.wyt.iexuetang.hd.iexuetang/com.wyt.common.ui.adv.AdvertisingActivity2}" drawable="geling_class" name="格灵课堂" />
   <item component="ComponentInfo{com.oplus.studycenter/com.oplus.studycenter.main.ui.activity.SplashActivity}" drawable="study_space" name="学习空间" />
