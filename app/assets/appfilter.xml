@@ -6961,6 +6961,7 @@
   <item component="ComponentInfo{com.coloros.familyguard/com.coloros.familyguard.FakeActivity}" drawable="family_safety" name="家人守护" />
   <item component="ComponentInfo{com.tencent.qqmusicpad/com.tencent.qqmusiccar.app.activity.AppStarterActivity}" drawable="qqmusic" name="QQ音乐HD" />
   <item component="ComponentInfo{com.qiyi.video.pad/com.qiyi.video.WelcomeActivity}" drawable="iqiyi" name="爱奇艺PAD" />
+  <item component="ComponentInfo{com.steampy.app/com.steampy.app.activity.common.splash.SplashActivity}" drawable="strempy" name="SteamPY" />
   <item component="ComponentInfo{com.oplus.aimemory/com.oplus.aimemory.MainActivity}" drawable="xiaobu_memory" name="小布记忆" />
   <item component="ComponentInfo{com.tencent.fiftyone.yc/com.tencent.gcloud.msdk.core.policy.MSDKPolicyActivity}" drawable="fiftyone" name="桃源深处有人家" />
   <item component="ComponentInfo{com.example.pixel/com.example.pixel.MainActivity}" drawable="draw_pixel" name="画像素" />
