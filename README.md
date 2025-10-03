@@ -26,7 +26,7 @@ Lawnicons is an icon pack developed by the Lawnchair team and supported by our c
 
 Try Lawnicons on the latest version of Lawnchair. You can enable themed icons by going to `Home Settings → General → Icon Style` and choosing the desired option.
 
-[Send feedback](https://lawnchair.app/lawnicons-feedback/) • [Try Lawnchair](https://play.google.com/store/apps/details?id=app.lawnchair.play)
+[Try Lawnchair](https://play.google.com/store/apps/details?id=app.lawnchair.play)
 
 ## Download
 
@@ -53,10 +53,7 @@ Lawnicons on the Play Store will install as a different app from other sources.
 
 ## Contributing
 
-
 Whether you want to work on icons or solve development issues, please refer to our guidelines. 
-
-✨ **For icon contributors.** At the end of the month [x9136](https://github.com/x9136) will add as many new icons as you do.  
 
 [Lawnicons guidelines](CONTRIBUTING.md)
 
