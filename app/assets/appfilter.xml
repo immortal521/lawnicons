@@ -7038,10 +7038,15 @@
   <item component="ComponentInfo{com.steampy.app/com.steampy.app.activity.common.splash.SplashActivity}" drawable="steampy" name="SteamPY" />
   <item component="ComponentInfo{com.wsw.cospa/com.wsw.cospa.SplashActivity}" drawable="ycy" name="异次元" />
   <item component="ComponentInfo{com.oplus.aimemory/com.oplus.aimemory.MainActivity}" drawable="xiaobu_memory" name="小布记忆" />
-    <item component="ComponentInfo{com.tencent.fiftyone.yc/com.tencent.gcloud.msdk.core.policy.MSDKPolicyActivity}" drawable="fiftyone" name="桃源深处有人家" />
-    <item component="ComponentInfo{com.truestudio.guitartuner/tech.truestudio.tuner.tuner.activity.LA}" drawable="guitartuner" name="吉他调音大师" />
+  <item component="ComponentInfo{com.tencent.fiftyone.yc/com.tencent.gcloud.msdk.core.policy.MSDKPolicyActivity}" drawable="fiftyone" name="桃源深处有人家" />
+  <item component="ComponentInfo{com.truestudio.guitartuner/tech.truestudio.tuner.tuner.activity.LA}" drawable="guitartuner" name="吉他调音大师" />
   <item component="ComponentInfo{com.example.pixel/com.example.pixel.MainActivity}" drawable="draw_pixel" name="画像素" />
+  <item component="ComponentInfo{com.tencent.tmgp.dfm/com.epicgames.ue4.SplashActivity}" drawable="sjzxd" name="三角洲行动" />
+  <item component="ComponentInfo{com.shizhuang.duapp/com.shizhuang.duapp.modules.home.ui.SplashActivity}" drawable="dewu" name="得物" />
   <item component="ComponentInfo{cn.missevan/cn.missevan.activity.SplashActivity}" drawable="cat_fm" name="猫儿FM" />
+    <item component="ComponentInfo{com.hupu.shihuo/com.shizhi.shihuoapp.module.main.ui.welcome.WelcomeActivity}" drawable="shihuo" name="shihuo" />
+  <item component="ComponentInfo{com.wuba.zhuanzhuan/com.wuba.zhuanzhuan.presentation.view.activity.LaunchActivity}" drawable="zhuanzhuan" name="转转" />
+  <item component="ComponentInfo{com.ushaqi.zhuishushenqi.adfree/com.ushaqi.zhuishushenqi.ui.SplashActivity}" drawable="zssqmfb" name="追书神器免费版" />
   <item component="ComponentInfo{com.ikf.earphone/com.ikf.earphone.activity.WelcomeActivity}" drawable="ikf" name="iKF" />
   <item component="ComponentInfo{ee.ioc.phon.android.speak/ee.ioc.phon.android.speak.activity.SpeechActionActivity}" drawable="konele" name="Kõnele" />
   <item component="ComponentInfo{com.smartstudio.koki/com.smartstudio.koki.MainActivity}" drawable="koki" name="KÖKI" />
