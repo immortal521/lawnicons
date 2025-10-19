@@ -7081,6 +7081,7 @@
   <item component="ComponentInfo{com.truestudio.guitartuner/tech.truestudio.tuner.tuner.activity.LA}" drawable="guitartuner" name="吉他调音大师" />
   <item component="ComponentInfo{com.example.pixel/com.example.pixel.MainActivity}" drawable="draw_pixel" name="画像素" />
   <item component="ComponentInfo{com.tencent.tmgp.dfm/com.epicgames.ue4.SplashActivity}" drawable="sjzxd" name="三角洲行动" />
+  <item component="ComponentInfo{com.predidit.kazumi/com.example.kazumi.MainActivity}" drawable="kazumi" name="Kazumi" />
   <item component="ComponentInfo{com.shizhuang.duapp/com.shizhuang.duapp.modules.home.ui.SplashActivity}" drawable="dewu" name="得物" />
   <item component="ComponentInfo{cn.unipus.cloud/cn.unipus.cloud.mvvm.view.activity.SplashActivity}" drawable="uxiaoyuan" name="U校园AI版" />
   <item component="ComponentInfo{com.zjwh.android_wh_physicalfitness/com.zjwh.android_wh_physicalfitness.mvi.splash.SplashActivity}" drawable="ydsj" name="运动世界" />
