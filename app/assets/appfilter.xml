@@ -7043,8 +7043,11 @@
   <item component="ComponentInfo{com.example.pixel/com.example.pixel.MainActivity}" drawable="draw_pixel" name="画像素" />
   <item component="ComponentInfo{com.tencent.tmgp.dfm/com.epicgames.ue4.SplashActivity}" drawable="sjzxd" name="三角洲行动" />
   <item component="ComponentInfo{com.shizhuang.duapp/com.shizhuang.duapp.modules.home.ui.SplashActivity}" drawable="dewu" name="得物" />
+  <item component="ComponentInfo{cn.unipus.cloud/cn.unipus.cloud.mvvm.view.activity.SplashActivity}" drawable="uxiaoyuan" name="U校园AI版" />
+  <item component="ComponentInfo{com.zjwh.android_wh_physicalfitness/com.zjwh.android_wh_physicalfitness.mvi.splash.SplashActivity}" drawable="ydsj" name="运动世界" />
+  <item component="ComponentInfo{cn.com.chsi.chsiapp/cn.com.chsi.chsiapp.base.GuideActivity}" drawable="xxw" name="学信网" />
   <item component="ComponentInfo{cn.missevan/cn.missevan.activity.SplashActivity}" drawable="cat_fm" name="猫儿FM" />
-    <item component="ComponentInfo{com.hupu.shihuo/com.shizhi.shihuoapp.module.main.ui.welcome.WelcomeActivity}" drawable="shihuo" name="shihuo" />
+  <item component="ComponentInfo{com.hupu.shihuo/com.shizhi.shihuoapp.module.main.ui.welcome.WelcomeActivity}" drawable="shihuo" name="shihuo" />
   <item component="ComponentInfo{com.wuba.zhuanzhuan/com.wuba.zhuanzhuan.presentation.view.activity.LaunchActivity}" drawable="zhuanzhuan" name="转转" />
   <item component="ComponentInfo{com.ushaqi.zhuishushenqi.adfree/com.ushaqi.zhuishushenqi.ui.SplashActivity}" drawable="zssqmfb" name="追书神器免费版" />
   <item component="ComponentInfo{com.ikf.earphone/com.ikf.earphone.activity.WelcomeActivity}" drawable="ikf" name="iKF" />
