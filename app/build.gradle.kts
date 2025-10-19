@@ -22,7 +22,7 @@ val ciRunNumber = providers.environmentVariable("GITHUB_RUN_NUMBER").orNull.orEm
 val isReleaseBuild = ciBuild && ciRef.contains("main")
 val devReleaseName = if (ciBuild) "(Dev #$ciRunNumber)" else "($buildCommit)"
 
-val version = "2.14.1"
+val version = "2.15.0"
 val versionDisplayName = version + if (!isReleaseBuild) " $devReleaseName" else ""
 
 android {
@@ -33,7 +33,7 @@ android {
         applicationId = "app.lawnchair.lawnicons"
         minSdk = 26
         targetSdk = compileSdk
-        versionCode = 20
+        versionCode = 21
         versionName = versionDisplayName
         vectorDrawables.useSupportLibrary = true
     }
@@ -125,6 +125,7 @@ licensee {
     allow(SpdxId.MIT)
 
     bundleAndroidAsset = true
+    androidAssetReportPath = "licenses.json"
 }
 
 dependencies {
@@ -154,7 +155,7 @@ dependencies {
     val retrofitVersion = "3.0.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation("com.squareup.retrofit2:converter-kotlinx-serialization:$retrofitVersion")
-    implementation("com.squareup.okhttp3:okhttp:5.1.0")
+    implementation("com.squareup.okhttp3:okhttp:5.2.1")
 
     implementation("io.coil-kt:coil-compose:2.7.0")
     implementation("com.github.nanihadesuka:LazyColumnScrollbar:2.2.0")
