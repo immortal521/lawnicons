@@ -23,13 +23,17 @@ import androidx.core.content.FileProvider
 import app.lawnchair.lawnicons.BuildConfig
 import app.lawnchair.lawnicons.data.model.IconRequestData
 import app.lawnchair.lawnicons.ui.util.Constants
-import javax.inject.Inject
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesBinding
+import dev.zacsweers.metro.SingleIn
 
 interface IconRequestHandler {
     fun execute(context: Context, requestData: IconRequestData)
 }
 
-class ArcticonsDashboardHandler @Inject constructor() : IconRequestHandler {
+@SingleIn(AppScope::class)
+@ContributesBinding(AppScope::class)
+class ArcticonsDashboardHandler : IconRequestHandler {
     override fun execute(context: Context, requestData: IconRequestData) {
         val authority = "${context.packageName}.fileprovider"
         val uri = FileProvider.getUriForFile(context, authority, requestData.zipFile)

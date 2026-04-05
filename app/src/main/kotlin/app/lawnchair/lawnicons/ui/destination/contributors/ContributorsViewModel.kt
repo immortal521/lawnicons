@@ -21,8 +21,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.lawnchair.lawnicons.data.model.GitHubContributor
 import app.lawnchair.lawnicons.data.repository.GitHubContributorsRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.map
@@ -42,18 +43,19 @@ sealed interface ContributorsUiState {
 
 private data class ContributorsViewModelState(
     val isRefreshing: Boolean,
-    val contributors: List<GitHubContributor>? = null,
+    val contributors: List<GitHubContributor> = emptyList(),
     val hasError: Boolean = false,
 ) {
     fun toUiState(): ContributorsUiState = when {
         hasError -> ContributorsUiState.Error
-        contributors != null -> ContributorsUiState.Success(contributors)
+        contributors.isNotEmpty() -> ContributorsUiState.Success(contributors)
         else -> ContributorsUiState.Loading
     }
 }
 
-@HiltViewModel
-class ContributorsViewModel @Inject constructor(
+@ViewModelKey
+@ContributesIntoMap(AppScope::class)
+class ContributorsViewModel(
     private val repository: GitHubContributorsRepository,
 ) : ViewModel() {
 
@@ -67,31 +69,28 @@ class ContributorsViewModel @Inject constructor(
         )
 
     init {
-        viewModelState.update { it.copy(isRefreshing = true) }
-
         viewModelScope.launch {
-            val result = runCatching {
+            runCatching {
                 repository.getTopContributors()
-            }
-            viewModelState.update {
-                when {
-                    result.isSuccess -> it.copy(
+            }.onSuccess { list ->
+                viewModelState.update {
+                    it.copy(
                         isRefreshing = false,
-                        contributors = result.getOrThrow(),
+                        contributors = list,
                         hasError = false,
                     )
-
-                    else -> {
-                        Log.e(
-                            "ContributorsViewModel",
-                            "Failed to load contributors",
-                            result.exceptionOrNull(),
-                        )
-                        it.copy(
-                            isRefreshing = false,
-                            hasError = true,
-                        )
-                    }
+                }
+            }.onFailure { t ->
+                Log.e(
+                    "ContributorsViewModel",
+                    "Failed to load contributors",
+                    t,
+                )
+                viewModelState.update {
+                    it.copy(
+                        isRefreshing = false,
+                        hasError = true,
+                    )
                 }
             }
         }

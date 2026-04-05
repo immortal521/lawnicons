@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
+@file:OptIn(ExperimentalMaterial3ExpressiveApi::class)
+
 package app.lawnchair.lawnicons.ui.destination.about
 
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
@@ -30,31 +30,32 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Star
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalLayoutDirection
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 import app.lawnchair.lawnicons.BuildConfig
 import app.lawnchair.lawnicons.R
 import app.lawnchair.lawnicons.ui.components.ContributorRow
-import app.lawnchair.lawnicons.ui.components.IconLink
-import app.lawnchair.lawnicons.ui.components.core.CardHeader
 import app.lawnchair.lawnicons.ui.components.core.LawniconsScaffold
 import app.lawnchair.lawnicons.ui.components.core.SimpleListRow
-import app.lawnchair.lawnicons.ui.theme.LawniconsTheme
-import app.lawnchair.lawnicons.ui.util.Constants
+import app.lawnchair.lawnicons.ui.theme.icon.AppIcon
+import app.lawnchair.lawnicons.ui.theme.icon.Check
+import app.lawnchair.lawnicons.ui.theme.icon.LawnIcons
 import app.lawnchair.lawnicons.ui.util.PreviewLawnicons
+import app.lawnchair.lawnicons.ui.util.PreviewProviders
 import kotlinx.serialization.Serializable
 
 enum class ColumnTypes {
@@ -65,15 +66,15 @@ enum class ColumnTypes {
 }
 
 @Serializable
-data object About
+data object About : NavKey
 
-fun NavGraphBuilder.aboutDestination(
+fun EntryProviderScope<NavKey>.aboutDestination(
     onBack: () -> Unit,
     onNavigateToContributors: () -> Unit,
     onNavigateToAcknowledgements: () -> Unit,
     isExpandedScreen: Boolean,
 ) {
-    composable<About> {
+    entry<About> {
         About(
             onBack = onBack,
             onNavigateToContributors = onNavigateToContributors,
@@ -118,13 +119,18 @@ private fun About(
                         ),
                 ) {
                     if (LocalInspectionMode.current) {
-                        Icon(Icons.Rounded.Star, contentDescription = null, modifier = Modifier.size(72.dp))
+                        Icon(
+                            imageVector = LawnIcons.Check,
+                            contentDescription = null,
+                            modifier = Modifier.size(72.dp),
+                        )
                     } else {
                         Image(
-                            painter = painterResource(R.drawable.lawnicons_logo),
+                            imageVector = LawnIcons.AppIcon,
                             contentDescription = stringResource(id = R.string.app_name),
                             modifier = Modifier
-                                .size(72.dp),
+                                .size(72.dp)
+                                .clip(CircleShape),
                         )
                     }
                     Text(
@@ -140,27 +146,8 @@ private fun About(
                     )
                 }
             }
-            item {
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 16.dp),
-                    horizontalArrangement = Arrangement.SpaceEvenly,
-                ) {
-                    externalLinks.forEach {
-                        IconLink(
-                            iconResId = it.iconResId,
-                            label = stringResource(id = it.name),
-                            url = it.url,
-                        )
-                    }
-                }
-            }
-            item(contentType = ColumnTypes.SPACER) {
-                Spacer(Modifier.height(16.dp))
-            }
             item(contentType = ColumnTypes.HEADER) {
-                CardHeader(stringResource(id = R.string.core_contributors))
+                ListHeader(stringResource(id = R.string.core_contributors))
             }
             itemsIndexed(
                 coreContributors,
@@ -172,29 +159,24 @@ private fun About(
                     profileUrl = it.socialUrl,
                     divider = index != coreContributors.lastIndex,
                     description = it.descriptionRes?.let { stringResource(id = it) },
-                    background = true,
-                    first = index == 0,
-                    last = index == coreContributors.lastIndex,
+                    shapes = ListItemDefaults.segmentedShapes(index, coreContributors.size),
                 )
             }
             item(contentType = ColumnTypes.SPACER) {
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(8.dp))
             }
             item(contentType = ColumnTypes.NAVIGATION_ITEM) {
                 SimpleListRow(
-                    onClick = onNavigateToContributors,
                     label = stringResource(id = R.string.see_all_contributors),
-                    divider = false,
-                    first = true,
-                    last = true,
                     background = true,
+                    onClick = onNavigateToContributors,
                 )
             }
             item(contentType = ColumnTypes.SPACER) {
                 Spacer(Modifier.height(16.dp))
             }
             item(contentType = ColumnTypes.HEADER) {
-                CardHeader(stringResource(id = R.string.special_thanks))
+                ListHeader(stringResource(id = R.string.special_thanks))
             }
             itemsIndexed(
                 specialThanks,
@@ -207,81 +189,73 @@ private fun About(
                     description = it.descriptionRes?.let { stringResource(id = it) },
                     divider = index != specialThanks.lastIndex,
                     socialUrl = it.socialUrl,
-                    background = true,
-                    first = index == 0,
-                    last = index == specialThanks.lastIndex,
+                    shapes = ListItemDefaults.segmentedShapes(index, specialThanks.size),
                 )
             }
             item(contentType = ColumnTypes.SPACER) {
-                Spacer(Modifier.height(16.dp))
+                Spacer(Modifier.height(8.dp))
             }
             item(contentType = ColumnTypes.NAVIGATION_ITEM) {
                 SimpleListRow(
-                    onClick = onNavigateToAcknowledgements,
                     label = stringResource(id = R.string.acknowledgements),
-                    divider = false,
-                    first = true,
-                    last = true,
                     background = true,
+                    onClick = onNavigateToAcknowledgements,
                 )
             }
         }
     }
 }
 
-private val externalLinks = listOf(
-    ExternalLink(
-        iconResId = R.drawable.github_foreground,
-        name = R.string.github,
-        url = Constants.GITHUB,
-    ),
-    ExternalLink(
-        iconResId = R.drawable.feedback_icon,
-        name = R.string.send_feedback,
-        url = Constants.FEEDBACK_FORM,
-    ),
-)
+@Composable
+private fun ListHeader(label: String, modifier: Modifier = Modifier) {
+    Text(
+        text = label,
+        style = MaterialTheme.typography.titleSmall,
+        color = MaterialTheme.colorScheme.primary,
+        modifier = modifier.padding(start = 32.dp, bottom = 8.dp),
+    )
+}
 
 private val coreContributors = listOf(
     Contributor(
+        id = 8080853,
         name = "Suphon T.",
         username = "paphonb",
-        photoUrl = "https://avatars.githubusercontent.com/u/8080853",
         socialUrl = "https://x.com/paphonb",
         descriptionRes = R.string.contribution_core,
     ),
     Contributor(
+        id = 70206496,
         name = "SuperDragonXD",
         username = "SuperDragonXD",
-        photoUrl = "https://avatars.githubusercontent.com/u/70206496",
         socialUrl = "https://github.com/SuperDragonXD",
         descriptionRes = R.string.contribution_core,
     ),
     Contributor(
+        id = 100310118,
         name = "Patryk Radziszewski",
         username = "Chefski",
-        photoUrl = "https://avatars.githubusercontent.com/u/100310118",
         socialUrl = "https://github.com/Chefski",
         descriptionRes = R.string.contribution_icons,
     ),
     Contributor(
+        id = 60105060,
         name = "Gleb",
         username = "x9136",
-        photoUrl = "https://avatars.githubusercontent.com/u/60105060",
         socialUrl = "https://github.com/x9136",
         descriptionRes = R.string.contribution_icons,
     ),
     Contributor(
+        id = 49114212,
         name = "Grabster",
         username = "Grabstertv",
-        photoUrl = "https://avatars.githubusercontent.com/u/49114212",
         socialUrl = "https://x.com/grabstertv",
         descriptionRes = R.string.contribution_icons,
     ),
     Contributor(
-        name = "Goooler",
+        id = 10363352,
+        name = "Zongle Wang",
         username = "Goooler",
-        photoUrl = "https://avatars.githubusercontent.com/u/10363352",
         socialUrl = "https://github.com/Goooler",
         descriptionRes = R.string.contribution_infra,
     ),
@@ -289,23 +263,31 @@ private val coreContributors = listOf(
 
 private val specialThanks = listOf(
     Contributor(
+        id = 52837599,
         name = "Eatos",
-        photoUrl = "https://avatars.githubusercontent.com/u/52837599",
         socialUrl = "https://x.com/eatosapps",
         descriptionRes = R.string.special_thanks_icon,
     ),
     Contributor(
+        id = 29402532,
         name = "Rik Koedoot",
-        photoUrl = "https://avatars.githubusercontent.com/u/29402532",
         username = "rikkoedoot",
         descriptionRes = R.string.special_thanks_name,
     ),
 )
 
+val coreContributorIds = coreContributors.map { it.id } + listOf(
+    29139614, // Remove Patryk from contributors list, as per https://t.me/lawnchairci/1557
+    56888459, // Renovate bot
+    41898282, // GitHub Actions bot
+    198982749, // Copilot bot
+    175728472, // Copilot bot
+)
+
 @PreviewLawnicons
 @Composable
 private fun AboutPreview() {
-    LawniconsTheme {
+    PreviewProviders {
         About(
             {},
             {},
@@ -318,7 +300,7 @@ private fun AboutPreview() {
 @PreviewLawnicons
 @Composable
 private fun AboutPreviewExpanded() {
-    LawniconsTheme {
+    PreviewProviders {
         About(
             {},
             {},

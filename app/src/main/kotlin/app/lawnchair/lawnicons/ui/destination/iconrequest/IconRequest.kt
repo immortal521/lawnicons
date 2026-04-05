@@ -23,17 +23,15 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Email
-import androidx.compose.material.icons.rounded.KeyboardArrowDown
-import androidx.compose.material.icons.rounded.Share
 import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
@@ -43,15 +41,22 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FlexibleBottomAppBar
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
+import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.Snackbar
+import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
+import androidx.compose.material3.SnackbarResult
 import androidx.compose.material3.SplitButtonDefaults
 import androidx.compose.material3.SplitButtonLayout
+import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -62,39 +67,43 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.semantics.stateDescription
-import androidx.compose.ui.text.SpanStyle
-import androidx.compose.ui.text.buildAnnotatedString
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
-import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavGraphBuilder
-import androidx.navigation.compose.composable
+import androidx.navigation3.runtime.EntryProviderScope
+import androidx.navigation3.runtime.NavKey
 import app.lawnchair.lawnicons.R
 import app.lawnchair.lawnicons.data.model.SystemIconInfo
+import app.lawnchair.lawnicons.ui.components.AnnouncementDefaults
+import app.lawnchair.lawnicons.ui.components.AnnouncementList
 import app.lawnchair.lawnicons.ui.components.core.LawniconsScaffold
-import app.lawnchair.lawnicons.ui.components.core.ListRow
+import app.lawnchair.lawnicons.ui.components.core.ListRowLabel
 import app.lawnchair.lawnicons.ui.components.core.SimpleListRow
-import app.lawnchair.lawnicons.ui.util.Constants
+import app.lawnchair.lawnicons.ui.theme.adaptiveSurfaceColor
+import app.lawnchair.lawnicons.ui.theme.adaptiveSurfaceContainerColor
+import app.lawnchair.lawnicons.ui.theme.icon.Copy
+import app.lawnchair.lawnicons.ui.theme.icon.IconRequest
+import app.lawnchair.lawnicons.ui.theme.icon.KeyboardArrowDown
+import app.lawnchair.lawnicons.ui.theme.icon.LawnIcons
+import app.lawnchair.lawnicons.ui.theme.icon.Save
+import app.lawnchair.lawnicons.ui.theme.icon.Share
 import coil.compose.AsyncImage
+import dev.zacsweers.metrox.viewmodel.metroViewModel
 import kotlinx.coroutines.launch
 import kotlinx.serialization.Serializable
 
 @Serializable
-data object IconRequest
+data object IconRequest : NavKey
 
-fun NavGraphBuilder.iconRequestDestination(
+fun EntryProviderScope<NavKey>.iconRequestDestination(
     isExpandedScreen: Boolean,
     onBack: () -> Unit,
 ) {
-    composable<IconRequest> {
+    entry<IconRequest> {
         IconRequest(
             onBack = onBack,
             isExpandedScreen = isExpandedScreen,
@@ -104,13 +113,17 @@ fun NavGraphBuilder.iconRequestDestination(
 
 @OptIn(ExperimentalMaterial3ExpressiveApi::class, ExperimentalMaterial3Api::class)
 @Composable
-fun IconRequest(
+private fun IconRequest(
     isExpandedScreen: Boolean,
     modifier: Modifier = Modifier,
-    viewModel: IconRequestViewModel = hiltViewModel(),
+    viewModel: IconRequestViewModel = metroViewModel(),
     onBack: () -> Unit,
 ) {
     val context = LocalContext.current
+
+    val isEnabled by viewModel.isEnabled.collectAsStateWithLifecycle()
+
+    val announcements by viewModel.announcements.collectAsStateWithLifecycle()
 
     val availableIcons by viewModel.availableIcons.collectAsStateWithLifecycle()
     val isSavingInProgress by viewModel.isSavingInProgress.collectAsStateWithLifecycle()
@@ -135,7 +148,23 @@ fun IconRequest(
         onBack = onBack,
         modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
         snackbarHost = {
-            SnackbarHost(snackbarHostState)
+            SnackbarHost(snackbarHostState) {
+                val coroutineScope = rememberCoroutineScope()
+
+                SwipeToDismissBox(
+                    state = rememberSwipeToDismissBoxState(),
+                    backgroundContent = {},
+                    onDismiss = {
+                        coroutineScope.launch {
+                            snackbarHostState.currentSnackbarData?.dismiss()
+                        }
+                    },
+                ) {
+                    Snackbar(
+                        it,
+                    )
+                }
+            }
         },
         bottomBar = {
             FlexibleBottomAppBar(
@@ -160,11 +189,27 @@ fun IconRequest(
                     )
                 }
 
+                val coroutineScope = rememberCoroutineScope()
+                val string = stringResource(R.string.icon_requests_suspended)
+
                 IconRequestButton(
                     enabled = selectedIconsCount > 0 && !isSavingInProgress,
                     isExpandedScreen = isExpandedScreen,
                     onRequest = {
-                        viewModel.requestIcons(context)
+                        if (isEnabled) {
+                            viewModel.requestIcons(context)
+                        } else {
+                            coroutineScope.launch {
+                                val result = snackbarHostState
+                                    .showSnackbar(
+                                        message = string,
+                                        duration = SnackbarDuration.Short,
+                                    )
+                                if (result == SnackbarResult.Dismissed) {
+                                    snackbarHostState.currentSnackbarData?.dismiss()
+                                }
+                            }
+                        }
                     },
                     onShareFile = {
                         viewModel.shareFile(context)
@@ -187,46 +232,29 @@ fun IconRequest(
         LazyColumn(
             contentPadding = paddingValues,
         ) {
-            item {
-                ListRow(
-                    label = {
-                        Text(
-                            text = buildAnnotatedString {
-                                append(stringResource(R.string.icon_request_mail_hint))
-                                withStyle(
-                                    SpanStyle(
-                                        fontWeight = FontWeight.Bold,
-                                    ),
-                                ) {
-                                    append(Constants.ICON_REQUEST_EMAIL)
-                                }
-                            },
-                            style = MaterialTheme.typography.bodyMedium,
-                            color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        )
-                    },
-                    startIcon = {
-                        Icon(
-                            imageVector = Icons.Rounded.Email,
-                            contentDescription = null,
-                        )
-                    },
-                    background = true,
-                    first = true,
-                    last = true,
-                )
-                Spacer(Modifier.height(8.dp))
+            if (announcements.isNotEmpty()) {
+                item {
+                    AnnouncementList(
+                        announcements,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(horizontal = 8.dp),
+                        colors = AnnouncementDefaults.colors(
+                            containerColor = adaptiveSurfaceContainerColor,
+                        ),
+                    )
+                }
             }
-            itemsIndexed(availableIcons) { index, systemIconInfo ->
+            item {
+                Spacer(Modifier.height(4.dp))
+            }
+            items(availableIcons) { systemIconInfo ->
                 IconRequestRow(
                     systemIconInfo = systemIconInfo,
                     checked = systemIconInfo in selectedIcons,
                     onCheckedChange = {
                         viewModel.toggleSelection(systemIconInfo)
                     },
-                    first = index == 0,
-                    last = index == availableIcons.lastIndex,
-                    divider = index != availableIcons.lastIndex,
                 )
             }
         }
@@ -257,7 +285,7 @@ private fun IconRequestButton(
                     enabled = enabled,
                 ) {
                     Icon(
-                        painter = painterResource(R.drawable.icon_request_app),
+                        imageVector = LawnIcons.IconRequest,
                         modifier = Modifier.size(SplitButtonDefaults.LeadingIconSize),
                         contentDescription = null,
                     )
@@ -289,7 +317,7 @@ private fun IconRequestButton(
                             label = "Trailing icon rotation",
                         )
                     Icon(
-                        Icons.Rounded.KeyboardArrowDown,
+                        imageVector = LawnIcons.KeyboardArrowDown,
                         modifier =
                         Modifier
                             .size(SplitButtonDefaults.TrailingIconSize)
@@ -310,7 +338,7 @@ private fun IconRequestButton(
                         title = stringResource(R.string.share_file),
                         onClick = onShareFile,
                         icon = {
-                            Icon(Icons.Rounded.Share, contentDescription = null)
+                            Icon(imageVector = LawnIcons.Share, contentDescription = null)
                         },
                     ),
                     MenuItemRow(
@@ -318,7 +346,7 @@ private fun IconRequestButton(
                         onClick = onSaveFile,
                         icon = {
                             Icon(
-                                painterResource(R.drawable.save_app_component),
+                                imageVector = LawnIcons.Save,
                                 contentDescription = null,
                             )
                         },
@@ -328,7 +356,7 @@ private fun IconRequestButton(
                         onClick = onCopyComponents,
                         icon = {
                             Icon(
-                                painterResource(R.drawable.copy_to_clipboard),
+                                imageVector = LawnIcons.Copy,
                                 contentDescription = null,
                             )
                         },
@@ -348,7 +376,7 @@ data class MenuItemRow(
     val icon: @Composable () -> Unit,
 )
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun ResponsiveMenu(
     menuItems: List<MenuItemRow>,
@@ -383,43 +411,45 @@ fun ResponsiveMenu(
             modifier = modifier,
         ) {
             LazyColumn {
-                items(menuItems) {
+                itemsIndexed(menuItems) { index, it ->
                     SimpleListRow(
                         label = it.title,
-                        onClick = {
-                            it.onClick()
-                            coroutineScope.launch {
-                                sheetState.hide()
-                            }
-                        },
                         startIcon = it.icon,
-                    )
+                        shapes = ListItemDefaults.segmentedShapes(index, menuItems.size),
+                    ) {
+                        it.onClick()
+                        coroutineScope.launch {
+                            sheetState.hide()
+                        }
+                    }
                 }
             }
         }
     }
 }
 
+@OptIn(ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun IconRequestRow(
     systemIconInfo: SystemIconInfo,
     checked: Boolean,
     onCheckedChange: (Boolean) -> Unit,
     modifier: Modifier = Modifier,
-    first: Boolean = false,
-    last: Boolean = false,
-    divider: Boolean = true,
 ) {
-    ListRow(
-        label = {
-            Text(
-                text = systemIconInfo.label,
-                maxLines = 1,
-                style = MaterialTheme.typography.bodyLarge,
-                overflow = TextOverflow.Ellipsis,
-            )
+    ListItem(
+        selected = checked,
+        onClick = {
+            onCheckedChange(!checked)
         },
-        description = {
+        colors = ListItemDefaults.colors(
+            containerColor = adaptiveSurfaceColor,
+            selectedContainerColor = adaptiveSurfaceColor,
+        ),
+        modifier = modifier,
+        content = {
+            ListRowLabel(systemIconInfo.label)
+        },
+        supportingContent = {
             Text(
                 text = systemIconInfo.componentName.flattenToString(),
                 maxLines = 1,
@@ -428,26 +458,18 @@ fun IconRequestRow(
                 color = MaterialTheme.colorScheme.onSurfaceVariant,
             )
         },
-        modifier = modifier,
-        startIcon = {
+        leadingContent = {
             AsyncImage(
                 model = systemIconInfo.drawable,
                 contentDescription = null,
                 modifier = Modifier.requiredSize(48.dp),
             )
         },
-        endIcon = {
+        trailingContent = {
             Checkbox(
                 checked = checked,
                 onCheckedChange = onCheckedChange,
             )
         },
-        onClick = {
-            onCheckedChange(!checked)
-        },
-        background = true,
-        first = first,
-        last = last,
-        divider = divider,
     )
 }

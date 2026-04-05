@@ -3,7 +3,7 @@
     <!-- General -->
     <!-- Application name -->
     <!-- Version name, with %s as the version code -->
-    <string name="version_x">Versio: %s</string>
+    <string name="version_x">Versio %s</string>
     <!-- Search bar -->
     <!-- The hint shown in the search bar, with %d as the number of icons. -->
     <!-- We don't currently provide a singular form, because it's always guaranteed that there will be atleast 2 or more icons. -->
@@ -18,11 +18,11 @@
     <!-- About page -->
     <string name="about">Tietoja</string>
     <!-- External Links -->
+    <!-- Discord link -->
     <!-- GitHub repository link-->
+    <!-- Open Collective repository link-->
     <!-- Icon Request form link -->
-    <string name="request_form">Kuvaketoiveiden lomake</string>
     <!-- Send feedback form link -->
-    <string name="send_feedback">Lähetä palautetta</string>
     <!-- Contributors section of About page -->
     <!-- Contributors label -->
     <string name="contributors">Kehittäjät</string>
@@ -52,23 +52,19 @@
     <string name="name">Nimi</string>
     <!-- Drawable prefix -->
     <string name="drawable">Piirrettävä</string>
-    <!-- Package prefix -->
-    <string name="component">Komponentin nimi</string>
+    <!-- Component -->
+    <string name="component">ID</string>
     <!-- Mapped components -->
-    <string name="mapped_components">Kartoitetut komponentit</string>
+    <string name="mapped_components">Mapped IDs</string>
     <!-- Outdated icon info -->
     <string name="icon_info_outdated_warning">Jos kuvake on vanhentunut uudistuksen vuoksi, luo ongelma Gihubissa.</string>
     <!-- Chevron a11y description -->
-    <string name="toggle_visibility_of_contents">Muokkaa sisällön näkyvyyttä</string>
     <!-- Request icons button -->
     <string name="request_icons">Toivo kuvakkeita</string>
-    <string name="copy_to_clipboard">Kopioi leikepöydälle</string>
     <string name="copied_text">Kopioitu teksti</string>
     <!-- Snackbar content -->
-    <string name="snackbar_request_icons_hint">Toivo puuttuvia kuvakkeita alapalkista</string>
-    <string name="icon_requests_suspended">Kuvaketoivomukset on keskeytetty. (Vieraile GitHubissa, jos haluat luoda kuvakkeita.</string>
-    <string name="snackbar_request_too_large">Kopioitu kuvaketoivomuksen tiedot leikepöydälle. Toivoaksesi niitä, täytä tiedot lomakkeeseen.</string>
-    <string name="snackbar_use_fallback_link">Avaa lomake</string>
+    <string name="icon_requests_fulfilled">All icons are supported. Report rebrandings via GitHub issues.</string>
+    <string name="icon_requests_suspended">Icon requests open for a limited time with every new Lawnicons release.</string>
     <!-- Missing icons screen -->
     <string name="missing_icons">Puuttuvat kuvakkeet</string>
     <string name="clear_all">Tyhjennä valinta</string>
@@ -78,10 +74,9 @@
     <string name="toggle_button_expanded">Laajennettu</string>
     <string name="toggle_button_collapsed">Supistettu</string>
     <string name="toggle_button_content_description">Vaihtokytkin</string>
-    <string name="icon_request_mail_hint">Mail a request file to\u0020</string>
     <string name="share_file">Jaa tiedosto</string>
     <string name="save_file">Tallenna tiedosto</string>
-    <string name="copy_components">Kopioi sovelluksen komponentit</string>
+    <string name="copy_components">Copy app IDs</string>
     <string name="toast_file_saved_successful">Tiedosto tallennettu onnistuneesti</string>
     <string name="toast_file_save_error">Virhe tiedostoa tallentaessa</string>
     <string name="toast_file_zip_error">Ei pystytty luomaan pyyntötiedostoa</string>

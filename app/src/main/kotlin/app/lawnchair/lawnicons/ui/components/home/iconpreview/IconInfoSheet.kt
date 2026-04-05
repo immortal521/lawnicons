@@ -32,11 +32,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.text.selection.SelectionContainer
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Call
-import androidx.compose.material.icons.rounded.Email
-import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -58,9 +53,12 @@ import app.lawnchair.lawnicons.R
 import app.lawnchair.lawnicons.data.model.IconInfo
 import app.lawnchair.lawnicons.ui.components.IconLink
 import app.lawnchair.lawnicons.ui.components.core.ListRow
-import app.lawnchair.lawnicons.ui.theme.LawniconsTheme
+import app.lawnchair.lawnicons.ui.theme.icon.Github
+import app.lawnchair.lawnicons.ui.theme.icon.LawnIcons
+import app.lawnchair.lawnicons.ui.theme.icon.ShareIcon
 import app.lawnchair.lawnicons.ui.util.Constants
 import app.lawnchair.lawnicons.ui.util.PreviewLawnicons
+import app.lawnchair.lawnicons.ui.util.PreviewProviders
 import app.lawnchair.lawnicons.ui.util.SampleData
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -112,14 +110,8 @@ fun IconInfoSheet(
                     horizontalArrangement = Arrangement.Center,
                 ) {
                     if (LocalInspectionMode.current) {
-                        val icon = when (iconInfo.drawableId) {
-                            1 -> Icons.Rounded.Email
-                            2 -> Icons.Rounded.Search
-                            3 -> Icons.Rounded.Call
-                            else -> Icons.Rounded.Warning
-                        }
                         Icon(
-                            icon,
+                            iconInfo.fallbackImage,
                             contentDescription = iconInfo.drawableName,
                             modifier = Modifier.size(250.dp),
                             tint = MaterialTheme.colorScheme.onBackground,
@@ -140,13 +132,13 @@ fun IconInfoSheet(
                     horizontalArrangement = Arrangement.Center,
                 ) {
                     IconLink(
-                        iconResId = R.drawable.github_foreground,
+                        imageVector = LawnIcons.Github,
                         label = stringResource(id = R.string.view_on_github),
-                        url = "${Constants.GITHUB}/blob/develop/svgs/$githubName.svg",
+                        url = "${Constants.GITHUB}?file=svgs/$githubName.svg",
                     )
                     Spacer(Modifier.width(16.dp))
                     IconLink(
-                        iconResId = R.drawable.share_icon,
+                        imageVector = LawnIcons.ShareIcon,
                         label = stringResource(id = R.string.share),
                         onClick = {
                             val intent = Intent().apply {
@@ -178,8 +170,6 @@ fun IconInfoSheet(
                             color = MaterialTheme.colorScheme.onSurfaceVariant,
                         )
                     },
-                    divider = false,
-                    enforceHeight = false,
                 )
             }
             item {
@@ -258,8 +248,6 @@ private fun IconInfoListRow(
                     }
                 }
             },
-            divider = false,
-            enforceHeight = false,
         )
         Spacer(Modifier.height(16.dp))
     }
@@ -269,7 +257,7 @@ private fun IconInfoListRow(
 @Composable
 private fun IconInfoPopupPreview() {
     val showPopup = remember { mutableStateOf(true) }
-    LawniconsTheme {
+    PreviewProviders {
         IconInfoSheet(
             iconInfo = SampleData.iconInfoSample,
         ) {

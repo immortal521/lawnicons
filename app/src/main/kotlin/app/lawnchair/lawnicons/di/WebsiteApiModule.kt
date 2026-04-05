@@ -16,27 +16,55 @@
 
 package app.lawnchair.lawnicons.di
 
+import android.app.Application
+import app.lawnchair.lawnicons.data.api.AnnouncementsAPI
 import app.lawnchair.lawnicons.data.api.IconRequestSettingsAPI
 import app.lawnchair.lawnicons.data.kotlinxJson
-import dagger.Module
-import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
+import app.lawnchair.lawnicons.ui.util.Constants
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesTo
+import dev.zacsweers.metro.Provides
+import dev.zacsweers.metro.SingleIn
+import java.io.File
+import okhttp3.Cache
 import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.kotlinx.serialization.asConverterFactory
 import retrofit2.create
 
-@Module
-@InstallIn(SingletonComponent::class)
-class WebsiteApiModule {
+@ContributesTo(AppScope::class)
+interface WebsiteApiModule {
+
+    // Inside WebsiteApiModule
+    @Provides
+    @SingleIn(AppScope::class)
+    fun providesOkHttpClient(application: Application): OkHttpClient {
+        val cacheSize = 5L * 1024 * 1024 // 5 MB
+        val cache = Cache(File(application.cacheDir, "http_cache"), cacheSize)
+
+        return OkHttpClient.Builder()
+            .cache(cache)
+            .build()
+    }
 
     @Provides
-    @Singleton
-    fun providesWebsiteIconRequestApi(): IconRequestSettingsAPI {
+    @SingleIn(AppScope::class)
+    fun providesWebsiteIconRequestApi(client: OkHttpClient): IconRequestSettingsAPI {
         return Retrofit.Builder()
-            .baseUrl("https://lawnchair.app/")
+            .baseUrl(Constants.WEBSITE)
+            .client(client)
+            .addConverterFactory(kotlinxJson.asConverterFactory("application/json".toMediaType()))
+            .build()
+            .create()
+    }
+
+    @Provides
+    @SingleIn(AppScope::class)
+    fun providesWebsiteAnnouncementsApi(client: OkHttpClient): AnnouncementsAPI {
+        return Retrofit.Builder()
+            .baseUrl(Constants.WEBSITE)
+            .client(client)
             .addConverterFactory(kotlinxJson.asConverterFactory("application/json".toMediaType()))
             .build()
             .create()

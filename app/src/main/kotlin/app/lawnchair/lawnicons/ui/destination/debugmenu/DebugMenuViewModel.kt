@@ -21,11 +21,13 @@ import app.lawnchair.lawnicons.data.repository.NewIconsRepository
 import app.lawnchair.lawnicons.data.repository.PreferenceManager
 import app.lawnchair.lawnicons.data.repository.home.IconRepository
 import app.lawnchair.lawnicons.data.repository.iconrequest.IconRequestRepository
-import dagger.hilt.android.lifecycle.HiltViewModel
-import javax.inject.Inject
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
 
-@HiltViewModel
-class DebugMenuViewModel @Inject constructor(
+@ViewModelKey
+@ContributesIntoMap(AppScope::class)
+class DebugMenuViewModel(
     iconRepository: IconRepository,
     newIconsRepository: NewIconsRepository,
     iconRequestRepository: IconRequestRepository,

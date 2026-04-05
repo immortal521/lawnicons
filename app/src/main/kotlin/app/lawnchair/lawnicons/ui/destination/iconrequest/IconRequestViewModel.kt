@@ -25,16 +25,20 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.lawnchair.lawnicons.R
+import app.lawnchair.lawnicons.data.model.Announcement
+import app.lawnchair.lawnicons.data.model.AnnouncementLocation
 import app.lawnchair.lawnicons.data.model.IconRequestData
 import app.lawnchair.lawnicons.data.model.SystemIconInfo
+import app.lawnchair.lawnicons.data.repository.home.AnnouncementsRepository
 import app.lawnchair.lawnicons.data.repository.iconrequest.IconRequestHandler
 import app.lawnchair.lawnicons.data.repository.iconrequest.IconRequestRepository
 import app.lawnchair.lawnicons.data.repository.iconrequest.formatIconRequestList
 import app.lawnchair.lawnicons.ui.util.copyTextToClipboard
-import dagger.hilt.android.lifecycle.HiltViewModel
+import dev.zacsweers.metro.AppScope
+import dev.zacsweers.metro.ContributesIntoMap
+import dev.zacsweers.metrox.viewmodel.ViewModelKey
 import java.io.File
 import java.io.FileOutputStream
-import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
@@ -46,9 +50,11 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
-@HiltViewModel
-class IconRequestViewModel @Inject constructor(
+@ViewModelKey
+@ContributesIntoMap(AppScope::class)
+class IconRequestViewModel(
     private val iconRequestRepository: IconRequestRepository,
+    private val announcementsRepository: AnnouncementsRepository,
     private val requestHandler: IconRequestHandler,
 ) : ViewModel() {
     val availableIcons = iconRequestRepository.iconRequestList
@@ -58,6 +64,29 @@ class IconRequestViewModel @Inject constructor(
             started = SharingStarted.WhileSubscribed(5000),
             initialValue = emptyList(),
         )
+
+    val isEnabled = iconRequestRepository.isEnabled
+
+    private val _announcements = MutableStateFlow<List<Announcement>>(emptyList())
+    val announcements = _announcements.asStateFlow()
+
+    init {
+        viewModelScope.launch {
+            runCatching {
+                announcementsRepository.getAnnouncements().filter {
+                    it.location == AnnouncementLocation.IconRequest
+                }
+            }.onSuccess {
+                _announcements.value = it
+            }.onFailure {
+                Log.e(
+                    "IconRequestViewModel",
+                    "Failed to load announcements",
+                    it,
+                )
+            }
+        }
+    }
 
     private val _selectedIcons = MutableStateFlow<List<SystemIconInfo>>(emptyList())
     val selectedIcons: StateFlow<List<SystemIconInfo>> = _selectedIcons.asStateFlow()
