@@ -8693,6 +8693,7 @@
   <item component="ComponentInfo{com.panpandada.you/com.panpandada.you.MainActivity}" drawable="monet_line" name="莫奈线条" />
   <item component="ComponentInfo{com.oneplus.brickmode/com.oneplus.brickmode.activity.HomeActivity}" drawable="zen_space" name="禅定空间" />
   <item component="ComponentInfo{cn.gywc.guangyuanzhijia/io.dcloud.PandoraEntry}" drawable="home_of_light" name="光源之家" />
+  <item component="ComponentInfo{com.hypergryph.skland/com.hypergryph.skland.splash.SplashActivity}" drawable="forest_sky_island" name="森空岛" />
   <!-- self end -->
   <item component="ComponentInfo{com.ikf.earphone/com.ikf.earphone.activity.WelcomeActivity}" drawable="ikf" name="iKF" />
   <item component="ComponentInfo{ee.ioc.phon.android.speak/ee.ioc.phon.android.speak.activity.SpeechActionActivity}" drawable="konele" name="Kõnele" />
