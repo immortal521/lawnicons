@@ -104,7 +104,6 @@ android {
 androidComponents {
     onVariants { variant ->
         variant.outputs.forEach { output ->
-            // TODO: https://github.com/android/gradle-recipes/blob/cbe7c7dea2a3f5b1764756f24bf453d1235c80e2/listenToArtifacts/README.md
             with(output as com.android.build.api.variant.impl.VariantOutputImpl) {
                 val newApkName = "Lawnicons ${versionName.get()} v${versionCode.get()}_${variant.buildType}.apk"
                 outputFileName = newApkName
@@ -147,7 +146,6 @@ dependencies {
     implementation(libs.androidx.lifecycle.viewmodel.compose)
 
     implementation(libs.kotlinx.serialization.json)
-
     implementation(libs.metrox.viewmodel.compose)
 
     implementation(libs.retrofit)
@@ -158,6 +156,8 @@ dependencies {
     implementation(libs.coil.svg)
     implementation(libs.lazycolumn.scrollbar)
     implementation(libs.material.motion.compose.core)
+
+    implementation("androidx.window:window:1.1.0")
 }
 
 tasks.preBuild {
