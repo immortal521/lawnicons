@@ -1,0 +1,6 @@
+<svg fill="none" height="192" width="192" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg">
+  <defs id="defs2"></defs>
+  <path d="m 22,153 15.346,-15.346 c 2.051,-2.051 2.315,-5.262 0.846,-7.762 C 32.35,119.949 29,108.366 29,96 29,58.997 58.997,29 96,29 c 14.159,0 27.292,4.392 38.112,11.888 M 170,39 154.654,54.346 c -2.051,2.051 -2.315,5.262 -0.846,7.763 C 159.65,72.05 163,83.633 163,96 c 0,37.003 -29.997,67 -67,67 -14.16,0 -27.292,-4.392 -38.112,-11.888" id="path2" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="12"></path>
+  <circle cx="96" cy="96" id="circle2" r="5" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="10"></circle>
+  <path d="M 95.999573,51.375953 A 5.0005001,5.0005001 0 0 0 91.67025,53.875045 L 55.113299,117.19276 a 5.0005001,5.0005001 0 0 0 4.33091,7.49887 h 73.112321 a 5.0005001,5.0005001 0 0 0 4.32931,-7.49887 L 100.33048,53.875045 a 5.0005001,5.0005001 0 0 0 -4.330907,-2.499092 z m 0,14.999313 27.895127,48.316814 H 68.104442 Z" id="path3" style="baseline-shift:baseline;display:inline;overflow:visible;opacity:1;vector-effect:none;fill:#000000;stroke-width:0.813436;stroke-linecap:round;stroke-linejoin:round;enable-background:accumulate;stop-color:#000000;stop-opacity:1"></path>
+</svg>

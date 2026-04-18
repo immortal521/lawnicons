@@ -8655,6 +8655,7 @@
   <item component="ComponentInfo{com.kwicpic/com.data.onboard.ui.activity.SplashActivity}" drawable="generic_camera" name="Kwikpic" />
   <item component="ComponentInfo{ru.kwork.app/ru.kwork.app.features.main.StartActivity}" drawable="kwork" name="Kwork" />
   <item component="ComponentInfo{com.epf.mip/com.epf.mip.MainActivity}" drawable="iakaun" name="KWSP i-Akaun" />
+  <!-- self start -->
   <item component="ComponentInfo{com.ss.android.ugc.aweme.lite/com.ss.android.ugc.aweme.splash.SplashActivity}" drawable="tiktok" name="抖音极速版" />
   <item component="ComponentInfo{com.larus.nova/com.larus.home.impl.alias.AliasActivity1}" drawable="doubao" name="豆包" />
   <item component="ComponentInfo{com.larus.nova/com.larus.home.impl.alias.AliasActivity2}" drawable="doubao" name="豆包" />
@@ -8687,6 +8688,12 @@
   <item component="ComponentInfo{com.hupu.shihuo/com.shizhi.shihuoapp.module.main.ui.welcome.WelcomeActivity}" drawable="shihuo" name="shihuo" />
   <item component="ComponentInfo{com.wuba.zhuanzhuan/com.wuba.zhuanzhuan.presentation.view.activity.LaunchActivity}" drawable="zhuanzhuan" name="转转" />
   <item component="ComponentInfo{com.ushaqi.zhuishushenqi.adfree/com.ushaqi.zhuishushenqi.ui.SplashActivity}" drawable="zssqmfb" name="追书神器免费版" />
+  <item component="ComponentInfo{com.heytap.member/com.oppo.usercenter.vip.UCVIPMainActivity}" drawable="my_realme" name="我的 realme" />
+  <item component="ComponentInfo{com.tencent.gamehelper.smoba/com.tencent.gamehelper.smoba.Default}" drawable="camp_of_kings" name="王者营地" />
+  <item component="ComponentInfo{com.panpandada.you/com.panpandada.you.MainActivity}" drawable="monet_line" name="莫奈线条" />
+  <item component="ComponentInfo{com.oneplus.brickmode/com.oneplus.brickmode.activity.HomeActivity}" drawable="zen_space" name="禅定空间" />
+  <item component="ComponentInfo{cn.gywc.guangyuanzhijia/io.dcloud.PandoraEntry}" drawable="home_of_light" name="光源之家" />
+  <!-- self end -->
   <item component="ComponentInfo{com.ikf.earphone/com.ikf.earphone.activity.WelcomeActivity}" drawable="ikf" name="iKF" />
   <item component="ComponentInfo{ee.ioc.phon.android.speak/ee.ioc.phon.android.speak.activity.SpeechActionActivity}" drawable="konele" name="Kõnele" />
   <item component="ComponentInfo{com.smartstudio.koki/com.smartstudio.koki.MainActivity}" drawable="koki" name="KÖKI" />
