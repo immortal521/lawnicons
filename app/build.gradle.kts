@@ -104,7 +104,7 @@ android {
 androidComponents {
     onVariants { variant ->
         variant.outputs.forEach { output ->
-            with(output as com.android.build.api.variant.impl.VariantOutputImpl) {
+            with(output) {
                 val newApkName = "Lawnicons ${versionName.get()} v${versionCode.get()}_${variant.buildType}.apk"
                 outputFileName = newApkName
             }
