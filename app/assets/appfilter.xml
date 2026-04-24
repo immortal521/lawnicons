@@ -8694,6 +8694,12 @@
   <item component="ComponentInfo{com.oneplus.brickmode/com.oneplus.brickmode.activity.HomeActivity}" drawable="zen_space" name="禅定空间" />
   <item component="ComponentInfo{cn.gywc.guangyuanzhijia/io.dcloud.PandoraEntry}" drawable="home_of_light" name="光源之家" />
   <item component="ComponentInfo{com.hypergryph.skland/com.hypergryph.skland.splash.SplashActivity}" drawable="forest_sky_island" name="森空岛" />
+  <item component="ComponentInfo{com.phoenix.read/com.dragon.read.pages.splash.SplashActivity}" drawable="red_fruit_free_short_drama" name="红果免费短剧" />
+  <item component="ComponentInfo{com.feng.monkeybook/com.kunfei.bookshelf.view.activity.NewWelcomeActivity}" drawable="biquge" name="笔趣阁" />
+  <item component="ComponentInfo{com.kkqiang/com.kkqiang.activity.SplashActivity}" drawable="kuai_kuai_qiang" name="快快抢" />
+  <item component="ComponentInfo{com.wps.koa/com.wps.woa.module.launcher.ui.LauncherActivity}" drawable="ai_hua_da" name="Ai化大" />
+  <item component="ComponentInfo{abc.ningban.gameloades/crc64e91f1276c636690c.LauncherActivity}" drawable="stardew_valley" name="柠版 SMAPI Launcher" />
+  <item component="ComponentInfo{com.fifedu.tsdx/com.fifedu.tsdx.ui.activity.login.SplashActivity}" drawable="fif" name="FiF口语（学生）" />
   <!-- self end -->
   <item component="ComponentInfo{com.ikf.earphone/com.ikf.earphone.activity.WelcomeActivity}" drawable="ikf" name="iKF" />
   <item component="ComponentInfo{ee.ioc.phon.android.speak/ee.ioc.phon.android.speak.activity.SpeechActionActivity}" drawable="konele" name="Kõnele" />
