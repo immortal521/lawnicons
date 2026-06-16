@@ -16,10 +16,11 @@
 
 package app.lawnchair.lawnicons.data.repository.home
 
-import android.app.Application
 import app.lawnchair.lawnicons.data.model.IconInfoModel
 import app.lawnchair.lawnicons.data.model.SearchInfo
 import app.lawnchair.lawnicons.data.model.SearchMode
+import app.lawnchair.lawnicons.data.repository.AppFilter
+import app.lawnchair.lawnicons.data.repository.IconDataSource
 import dev.zacsweers.metro.AppScope
 import dev.zacsweers.metro.ContributesBinding
 import dev.zacsweers.metro.SingleIn
@@ -41,7 +42,9 @@ interface IconRepository {
 
 @SingleIn(AppScope::class)
 @ContributesBinding(AppScope::class)
-class IconRepositoryImpl(application: Application) : IconRepository {
+class IconRepositoryImpl(
+    @AppFilter iconDataSource: IconDataSource,
+) : IconRepository {
 
     private val coroutineScope = CoroutineScope(Dispatchers.IO)
 
@@ -53,7 +56,7 @@ class IconRepositoryImpl(application: Application) : IconRepository {
 
     init {
         coroutineScope.launch {
-            val iconList = application.getIconInfo().sortedBy { it.label.lowercase() }
+            val iconList = iconDataSource.getIconInfo().sortedBy { it.label.lowercase() }
             val groupedIcons = iconList.associateBy { it.label }.values
             val iconCount = groupedIcons.size
 
@@ -72,7 +75,7 @@ class IconRepositoryImpl(application: Application) : IconRepository {
         val filteredIcons = _iconInfoModel.value.iconInfo.mapNotNull { candidate ->
             val searchIn = when (mode) {
                 SearchMode.LABEL -> candidate.componentNames.map { it.label }
-                SearchMode.COMPONENT -> candidate.componentNames.map { it.componentName.flattenToString() }
+                SearchMode.COMPONENT -> candidate.componentNames.map { it.component.flattenToString() }
                 SearchMode.DRAWABLE -> listOf(candidate.drawableName)
             }
             val indexOfMatch = searchIn.map {

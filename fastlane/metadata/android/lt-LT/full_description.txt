@@ -1,0 +1,1 @@
+<p>„Lawnicons“ – tai atvirojo kodo piktogramų rinkinys, skirtas „Android“ programoms. Piktogramos sukurtos remiantis „Material You“ stiliumi, pasižymi kontūrinio dizaino elementais ir suapvalintais kampais. Jos sukurtos „Lawnchair“ komandos ir bendruomenės.</p>

@@ -19,16 +19,20 @@
     <!-- Text shown when there are no search results, with %s as the search query -->
     <string name="no_items_found">No se ha encontrado %s</string>
     <!-- Toolbar actions -->
+    <!-- New icons button, with %1$s as the version name -->
+    <string name="new_icons_in_version">Iconos nuevos en v%1$s</string>
     <!-- Discord link -->
     <!-- GitHub repository link-->
-    <!-- Open Collective repository link-->
+    <!-- Open Collective link-->
+    <!-- Icon request dashboard link -->
+    <string name="icon_request_dashboard">Panel de solicitud de iconos</string>
     <!-- Label for the icon request action in the toolbar -->
     <string name="request_icons">Solicitar iconos</string>
     <!-- Snackbar content -->
     <!-- When all icons are fulfilled -->
-    <string name="icon_requests_fulfilled">All icons are supported. Report rebrandings via GitHub issues.</string>
+    <string name="icon_requests_fulfilled">Todos los iconos son compatibles. Informa sobre rediseños en los iconos originales a través de GitHub.</string>
     <!-- When icon requests are turned off via the JSON in the website -->
-    <string name="icon_requests_suspended">Icon requests open for a limited time with every new Lawnicons release.</string>
+    <string name="icon_requests_suspended">Se admite solicitar iconos durante un tiempo limitado tras cada lanzamiento de Lawnicons.</string>
     <!-- Label for the About screen and toolbar action -->
     <string name="about">Acerca de</string>
     <!-- Contributors section of About page -->
@@ -60,11 +64,11 @@
     <!-- Label for the drawable resource name -->
     <string name="drawable">Elemento gráfico</string>
     <!-- Label for the component ID -->
-    <string name="component">ID</string>
+    <string name="component">Identificador</string>
     <!-- Title for the section showing IDs mapped to an icon -->
-    <string name="mapped_components">Mapped IDs</string>
+    <string name="mapped_components">Identificadores asignados</string>
     <!-- Outdated icon info warning -->
-    <string name="icon_info_outdated_warning">Si el icono quedó obsoleto debido a un cambio significativo, reporta el problema en GitHub.</string>
+    <string name="icon_info_outdated_warning">Si el icono quedó obsoleto debido a un rediseño en el icono original, informa sobre el problema en GitHub.</string>
     <!-- Label for the action to view the icon's source on GitHub -->
     <string name="view_on_github">Ver en GitHub</string>
     <!-- Share button on icon info popup -->
@@ -77,8 +81,8 @@
     <!-- Button to select all icons -->
     <string name="select_all">Seleccionar todo</string>
     <!-- Split button -->
-    <!-- Button to request icons -->
-    <string name="request_icons_button">Solicitar</string>
+    <!-- Button to send email -->
+    <string name="send_email">Send email</string>
     <!-- Accessibility action to show the options sheet -->
     <string name="show_options_sheet">Mostrar tabla de opciones</string>
     <!-- Content description for the expanded state of a toggle button -->
@@ -86,14 +90,14 @@
     <!-- Content description for the collapsed state of a toggle button -->
     <string name="toggle_button_collapsed">Colapsado</string>
     <!-- Content description for a toggle button -->
-    <string name="toggle_button_content_description">Toggle button</string>
+    <string name="toggle_button_content_description">Botón de alternar</string>
     <!-- Dropdown items in split button -->
     <!-- Option to share the icon request as a file -->
     <string name="share_file">Compartir archivo</string>
     <!-- Option to save the icon request to a file -->
     <string name="save_file">Guardar archivo</string>
     <!-- Option to copy the component IDs for the selected icons -->
-    <string name="copy_components">Copy app IDs</string>
+    <string name="copy_components">Copiar identificador(es) de aplicación</string>
     <!-- Toasts -->
     <!-- Toast shown when a file is successfully saved -->
     <string name="toast_file_saved_successful">Se guardó el archivo</string>
@@ -106,8 +110,7 @@
     <!-- Toast message shown when text is copied to the clipboard -->
     <string name="copied_text">Se copió el texto</string>
     <!-- New icons screen -->
-    <!-- Title for the new icons screen, with %1$s as the version name -->
-    <string name="new_icons_in_version">Iconos nuevos en v%1$s</string>
     <!-- Label for the new icons section, with %1$s as the count of new icons -->
     <string name="new_icons">Iconos nuevos (%1$s)</string>
+    <string name="action_menu_overflow_description">More options</string>
 </resources>

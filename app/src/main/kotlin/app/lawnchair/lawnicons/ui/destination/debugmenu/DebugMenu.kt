@@ -47,7 +47,7 @@ import app.lawnchair.lawnicons.data.model.IconRequestModel
 import app.lawnchair.lawnicons.data.model.getFirstLabelAndComponent
 import app.lawnchair.lawnicons.data.model.splitByComponentName
 import app.lawnchair.lawnicons.data.repository.BasePreferenceManager
-import app.lawnchair.lawnicons.data.repository.DummySharedPreferences
+import app.lawnchair.lawnicons.data.repository.InMemoryPreferenceStore
 import app.lawnchair.lawnicons.data.repository.PreferenceManager
 import app.lawnchair.lawnicons.ui.components.core.LawniconsScaffold
 import app.lawnchair.lawnicons.ui.components.core.ListRow
@@ -193,7 +193,7 @@ private fun DebugMenuScreen(
                 ListRow(
                     label = {
                         Text(
-                            text = "${it.label}\n${it.componentName.flattenToString()}",
+                            text = "${it.label}\n${it.component.flattenToString()}",
                             fontFamily = FontFamily.Monospace,
                         )
                     },
@@ -218,7 +218,7 @@ private fun DebugMenuScreen(
                 ListRow(
                     label = {
                         Text(
-                            text = "${labelAndComponent.label}\n${labelAndComponent.componentName.flattenToString()}",
+                            text = "${labelAndComponent.label}\n${labelAndComponent.component.flattenToString()}",
                             fontFamily = FontFamily.Monospace,
                         )
                     },
@@ -265,7 +265,7 @@ private fun ListHeader(
 @Composable
 private fun DebugMenuScreenPreview() {
     PreviewProviders {
-        val prefs = PreferenceManager(DummySharedPreferences())
+        val prefs = PreferenceManager(InMemoryPreferenceStore())
 
         DebugMenuScreen(
             newIconsModel = IconInfoModel(

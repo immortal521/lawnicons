@@ -33,7 +33,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.material3.BottomAppBarDefaults
-import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
@@ -46,6 +45,7 @@ import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedButton
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Snackbar
 import androidx.compose.material3.SnackbarDuration
 import androidx.compose.material3.SnackbarHost
@@ -55,7 +55,7 @@ import androidx.compose.material3.SplitButtonDefaults
 import androidx.compose.material3.SplitButtonLayout
 import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
+import androidx.compose.material3.rememberBottomSheetState
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -86,7 +86,6 @@ import app.lawnchair.lawnicons.ui.components.core.SimpleListRow
 import app.lawnchair.lawnicons.ui.theme.adaptiveSurfaceColor
 import app.lawnchair.lawnicons.ui.theme.adaptiveSurfaceContainerColor
 import app.lawnchair.lawnicons.ui.theme.icon.Copy
-import app.lawnchair.lawnicons.ui.theme.icon.IconRequest
 import app.lawnchair.lawnicons.ui.theme.icon.KeyboardArrowDown
 import app.lawnchair.lawnicons.ui.theme.icon.LawnIcons
 import app.lawnchair.lawnicons.ui.theme.icon.Save
@@ -284,13 +283,7 @@ private fun IconRequestButton(
                     onClick = onRequest,
                     enabled = enabled,
                 ) {
-                    Icon(
-                        imageVector = LawnIcons.IconRequest,
-                        modifier = Modifier.size(SplitButtonDefaults.LeadingIconSize),
-                        contentDescription = null,
-                    )
-                    Spacer(Modifier.size(ButtonDefaults.IconSpacing))
-                    Text(stringResource(R.string.request_icons_button))
+                    Text(stringResource(R.string.send_email))
                 }
             },
             trailingButton = {
@@ -401,8 +394,9 @@ fun ResponsiveMenu(
             }
         }
     } else {
-        val sheetState = rememberModalBottomSheetState(
-            skipPartiallyExpanded = true,
+        val sheetState = rememberBottomSheetState(
+            initialValue = SheetValue.Hidden,
+            enabledValues = setOf(SheetValue.Hidden, SheetValue.PartiallyExpanded, SheetValue.Expanded),
         )
         val coroutineScope = rememberCoroutineScope()
         ModalBottomSheet(
@@ -451,7 +445,7 @@ fun IconRequestRow(
         },
         supportingContent = {
             Text(
-                text = systemIconInfo.componentName.flattenToString(),
+                text = systemIconInfo.component.flattenToString(),
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis,
                 style = MaterialTheme.typography.bodyMedium,

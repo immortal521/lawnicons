@@ -17,11 +17,10 @@
 package app.lawnchair.lawnicons.data.repository.home
 
 import android.annotation.SuppressLint
-import android.content.ComponentName
 import android.content.Context
 import android.util.Log
 import androidx.annotation.XmlRes
-import app.lawnchair.lawnicons.R
+import app.lawnchair.lawnicons.data.model.Component
 import app.lawnchair.lawnicons.data.model.IconInfo
 import app.lawnchair.lawnicons.data.model.LabelAndComponent
 import app.lawnchair.lawnicons.data.model.mergeByDrawableName
@@ -29,7 +28,7 @@ import org.xmlpull.v1.XmlPullParser
 
 @SuppressLint("DiscouragedApi")
 fun Context.getIconInfo(
-    @XmlRes xmlId: Int = R.xml.appfilter,
+    @XmlRes xmlId: Int,
 ): List<IconInfo> {
     val iconInfo = mutableListOf<IconInfo>()
     val componentInfoPrefixLength = "ComponentInfo{".length
@@ -57,7 +56,7 @@ fun Context.getIconInfo(
             val parsedComponentString =
                 componentString.substring(componentInfoPrefixLength, componentString.length - 1)
 
-            ComponentName.unflattenFromString(parsedComponentString)?.let { componentName ->
+            Component.unflattenFromString(parsedComponentString)?.let { componentName ->
                 val iconId = "${drawableName}_foreground"
                 val iconDrawable = resources.getIdentifier(iconId, "drawable", packageName)
 
@@ -67,7 +66,7 @@ fun Context.getIconInfo(
                         componentNames = listOf(
                             LabelAndComponent(
                                 label = iconName,
-                                componentName = componentName,
+                                component = componentName,
                             ),
                         ),
                         drawableId = iconDrawable,
